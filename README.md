@@ -18,7 +18,7 @@ Transform your Obsidian tasks into calendar events with automatic `.ics` file ge
 
 ## Installation
 
-### From Obsidian Community Plugins (Recommended)
+### From Obsidian Community Plugins (Recommended) (not yet available - help appreciated to make it happen though <3)
 
 1. Open Obsidian Settings
 2. Navigate to **Community Plugins** and disable **Safe Mode**
