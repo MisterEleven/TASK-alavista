@@ -1,12 +1,14 @@
-# Task-alavista Development Plan
+# TASK-alavista Development Plan
 
-## Step-by-Step Implementation Guide
+## Current Status: v1.0 Core Complete ✅
 
-This document outlines the incremental development approach for building the Task-alavista plugin. Each step is designed to be a small, testable commit.
+All 22 foundational steps have been completed. The plugin is functional with core features implemented.
 
 ---
 
-## Phase 1: Project Foundation (Steps 1-6)
+## Completed: Phase 1-7 (v1.0 Core)
+
+### Phase 1: Project Foundation ✅
 
 ### Step 1: Initialize Project Structure
 **Goal**: Create the basic folder structure and initialize npm project
@@ -374,14 +376,123 @@ Once all steps are complete:
 
 ---
 
-## Success Criteria
+## Recent Fixes (Post v1.0)
 
-The plugin is ready for v1.0 release when:
-- ✅ All 20 steps completed
-- ✅ Manual testing checklist passed
-- ✅ No console errors in Obsidian
-- ✅ ICS file subscribes in Apple Calendar
-- ✅ Deep links work correctly
-- ✅ Documentation is complete
-- ✅ Code passes linting
-- ✅ At least 3 beta testers provide feedback
+### Bug Fixes
+- ✅ Fixed deep link URL encoding (use %20 instead of +)
+- ✅ Fixed sidebar activation when right sidebar doesn't exist
+- ✅ Enhanced error handling with user-facing notices
+- ✅ Added deployment script for development workflow
+
+---
+
+## Next Steps: v1.1 Improvements
+
+### Priority 1: User Experience
+- [ ] Add file/folder picker for ICS path setting (replace text input)
+- [ ] Add visual feedback for ICS generation status
+- [ ] Improve error messages in sidebar for malformed tasks
+- [ ] Add "last synced" timestamp display
+
+### Priority 2: Settings Enhancements
+- [ ] Add setting for default event duration
+- [ ] Add setting for time zone handling
+- [ ] Add setting to exclude completed tasks from sidebar
+- [ ] Add setting for sidebar sort order (date, title, file)
+
+### Priority 3: UI Polish
+- [ ] Add task count badge to sidebar icon
+- [ ] Add color coding for task urgency (today, this week, later)
+- [ ] Add quick actions (edit, delete, duplicate task)
+- [ ] Improve mobile responsiveness
+
+### Priority 4: Performance
+- [ ] Add task cache size limit (prevent memory issues)
+- [ ] Optimize MetadataCache event handling
+- [ ] Add lazy loading for large task lists
+- [ ] Profile and optimize ICS generation
+
+---
+
+## Future: v2.0 Major Features
+
+### Natural Language Parsing (Optional)
+- [ ] Research NLP libraries (chrono-node, compromise)
+- [ ] Implement optional NLP mode alongside strict format
+- [ ] Add setting to toggle between strict and NLP parsing
+- [ ] Examples: "meeting tomorrow at 2pm", "call next Monday"
+
+### Recurring Events
+- [ ] Design recurring event syntax
+- [ ] Implement RRULE generation for ICS
+- [ ] Add UI for managing recurring tasks
+- [ ] Handle exceptions and modifications
+
+### Multi-Vault Support
+- [ ] Generate separate ICS files per vault
+- [ ] Add vault selector in settings
+- [ ] Handle vault switching gracefully
+
+### Advanced Features
+- [ ] Task templates with quick insert
+- [ ] Conflict detection (overlapping events)
+- [ ] Calendar view (month/week grid)
+- [ ] Export to other formats (Google Calendar JSON, Outlook CSV)
+- [ ] Two-way sync (read calendar events back to Obsidian)
+
+---
+
+## Technical Debt
+
+### Code Quality
+- [ ] Add unit tests for TaskParser
+- [ ] Add unit tests for IcsGenerator
+- [ ] Add integration tests for end-to-end flow
+- [ ] Improve error handling coverage
+- [ ] Add performance benchmarks
+
+### Documentation
+- [ ] Add inline code examples in TSDoc
+- [ ] Create video tutorial for YouTube
+- [ ] Add FAQ section to README
+- [ ] Create troubleshooting flowchart
+
+### Build & Deploy
+- [ ] Set up automated testing in CI
+- [ ] Add code coverage reporting
+- [ ] Create beta release channel
+- [ ] Set up automated changelog generation
+
+---
+
+## Community Requests
+
+Track feature requests from users:
+- [ ] Support for all-day events
+- [ ] Integration with Obsidian Calendar plugin
+- [ ] Support for task priorities
+- [ ] Bulk edit/delete operations
+- [ ] Import from external calendars
+
+---
+
+## Success Criteria for v1.1
+
+Ready for release when:
+- [ ] File picker implemented and tested
+- [ ] All Priority 1 items completed
+- [ ] No regressions from v1.0
+- [ ] Documentation updated
+- [ ] Beta tested by 3+ users
+- [ ] Performance benchmarks meet targets
+
+---
+
+## Success Criteria for v2.0
+
+Ready for release when:
+- [ ] At least 2 major features implemented
+- [ ] Comprehensive test suite (>80% coverage)
+- [ ] Performance optimized for large vaults (1000+ tasks)
+- [ ] Community feedback incorporated
+- [ ] Migration guide from v1.x
