@@ -46,5 +46,3 @@ if (prod) {
 } else {
   await context.watch();
 }
-
-// Made with Bob
