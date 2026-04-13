@@ -1,4 +1,4 @@
-import { App, TFile, MetadataCache, Vault } from "obsidian";
+import { App, TFile, Notice } from "obsidian";
 import { ScheduledTask } from "../parser/types";
 import { TaskParser } from "../parser/TaskParser";
 import { TaskValidator } from "../parser/TaskValidator";
@@ -84,7 +84,7 @@ export class TaskManager {
     // Listen for file renames
     this.app.vault.on("rename", (file, oldPath) => {
       if (file instanceof TFile && file.extension === "md") {
-        this.handleFileRename(file, oldPath);
+        void this.handleFileRename(file, oldPath);
       }
     });
   }
@@ -217,9 +217,11 @@ export class TaskManager {
       // Write to file
       await this.icsWriter.write(icsContent);
 
-      console.log(`Updated ICS file with ${filteredTasks.length} tasks`);
+      console.log(`Updated ICS file with ${filteredTasks.length} tasks at ${this.icsWriter.getPath()}`);
     } catch (error) {
       console.error("Failed to update ICS file:", error);
+      new Notice(`Failed to update ICS file: ${error instanceof Error ? error.message : "Unknown error"}`);
+      throw error;
     }
   }
 

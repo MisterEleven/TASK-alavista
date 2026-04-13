@@ -17,13 +17,12 @@ export class DeepLinkGenerator {
    * @returns obsidian:// URI
    */
   generate(task: ScheduledTask): string {
-    const params = new URLSearchParams({
-      vault: this.vaultName,
-      file: task.filePath,
-      line: String(task.lineNumber + 1), // Convert to 1-based line number
-    });
+    // Manually encode to use %20 instead of + for spaces
+    const vault = encodeURIComponent(this.vaultName);
+    const file = encodeURIComponent(task.filePath);
+    const line = task.lineNumber + 1; // Convert to 1-based line number
 
-    return `obsidian://open?${params.toString()}`;
+    return `obsidian://open?vault=${vault}&file=${file}&line=${line}`;
   }
 
   /**
@@ -34,13 +33,12 @@ export class DeepLinkGenerator {
    * @returns obsidian:// URI
    */
   generateCustom(filePath: string, lineNumber: number): string {
-    const params = new URLSearchParams({
-      vault: this.vaultName,
-      file: filePath,
-      line: String(lineNumber + 1),
-    });
+    // Manually encode to use %20 instead of + for spaces
+    const vault = encodeURIComponent(this.vaultName);
+    const file = encodeURIComponent(filePath);
+    const line = lineNumber + 1;
 
-    return `obsidian://open?${params.toString()}`;
+    return `obsidian://open?vault=${vault}&file=${file}&line=${line}`;
   }
 
   /**

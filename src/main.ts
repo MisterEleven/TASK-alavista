@@ -1,4 +1,4 @@
-import { Plugin } from "obsidian";
+import { Plugin, Notice } from "obsidian";
 import { PluginSettings, DEFAULT_SETTINGS } from "./settings/PluginSettings";
 import { TaskAlavistaSettingTab } from "./settings/SettingsTab";
 import { TaskAlavistaSidebarView, VIEW_TYPE_TASK_ALAVISTA } from "./ui/SidebarView";
@@ -47,7 +47,7 @@ export default class TaskAlavistaPlugin extends Plugin {
     this.registerCommands();
 
     // Activate sidebar view
-    this.activateSidebarView();
+    void this.activateSidebarView();
   }
 
   /**
@@ -76,7 +76,27 @@ export default class TaskAlavistaPlugin extends Plugin {
       name: "Refresh scheduled tasks",
       callback: () => {
         if (this.taskManager) {
-          void this.taskManager.refresh();
+          void this.taskManager.refresh().then(() => {
+            new Notice("Scheduled tasks refreshed and ICS file updated");
+          });
+        }
+      },
+    });
+
+    // Generate ICS file now
+    this.addCommand({
+      id: "generate-ics-now",
+      name: "Generate ICS file now",
+      callback: () => {
+        if (this.taskManager) {
+          void this.taskManager.refresh().then(() => {
+            if (this.taskManager) {
+              const tasks = this.taskManager.getTasks();
+              new Notice(`ICS file generated with ${tasks.length} tasks`);
+            }
+          }).catch((error) => {
+            new Notice(`Failed to generate ICS file: ${error instanceof Error ? error.message : "Unknown error"}`);
+          });
         }
       },
     });
@@ -86,7 +106,7 @@ export default class TaskAlavistaPlugin extends Plugin {
       id: "show-scheduled-tasks",
       name: "Show scheduled tasks sidebar",
       callback: () => {
-        this.activateSidebarView();
+        void this.activateSidebarView();
       },
     });
 
@@ -108,11 +128,23 @@ export default class TaskAlavistaPlugin extends Plugin {
   private async activateSidebarView(): Promise<void> {
     const { workspace } = this.app;
 
+    // Check if view already exists
     let leaf = workspace.getLeavesOfType(VIEW_TYPE_TASK_ALAVISTA)[0];
 
     if (!leaf) {
+      // Create new leaf in right sidebar
       const rightLeaf = workspace.getRightLeaf(false);
-      if (rightLeaf) {
+      if (!rightLeaf) {
+        // Right sidebar doesn't exist, create it
+        const newLeaf = workspace.getLeaf('split', 'vertical');
+        if (newLeaf) {
+          await newLeaf.setViewState({
+            type: VIEW_TYPE_TASK_ALAVISTA,
+            active: true,
+          });
+          leaf = newLeaf;
+        }
+      } else {
         await rightLeaf.setViewState({
           type: VIEW_TYPE_TASK_ALAVISTA,
           active: true,
@@ -122,7 +154,7 @@ export default class TaskAlavistaPlugin extends Plugin {
     }
 
     if (leaf) {
-      workspace.revealLeaf(leaf);
+      void workspace.revealLeaf(leaf);
     }
   }
 
@@ -130,7 +162,7 @@ export default class TaskAlavistaPlugin extends Plugin {
    * Load plugin settings from disk
    */
   async loadSettings(): Promise<void> {
-    this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+    this.settings = Object.assign({}, DEFAULT_SETTINGS, (await this.loadData()) as Partial<PluginSettings>);
   }
 
   /**

@@ -98,7 +98,7 @@ export class IcsWriter {
    *
    * @returns True if file exists
    */
-  async exists(): Promise<boolean> {
+  exists(): boolean {
     const file = this.vault.getAbstractFileByPath(this.filePath);
     return file instanceof TFile;
   }

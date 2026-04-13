@@ -12,13 +12,11 @@ export const VIEW_TYPE_TASK_ALAVISTA = "task-alavista-sidebar";
  * Sidebar view for displaying scheduled tasks
  */
 export class TaskAlavistaSidebarView extends ItemView {
-  private plugin: TaskAlavistaPlugin;
   private tasks: ScheduledTask[] = [];
   private filterCurrentNote: boolean = false;
 
   constructor(leaf: WorkspaceLeaf, plugin: TaskAlavistaPlugin) {
     super(leaf);
-    this.plugin = plugin;
     this.filterCurrentNote = plugin.settings.filterCurrentNoteOnly;
   }
 
@@ -99,7 +97,7 @@ export class TaskAlavistaSidebarView extends ItemView {
   private renderHeader(container: Element): void {
     const header = container.createDiv({ cls: "task-alavista-header" });
 
-    const title = header.createEl("h3", { text: "Scheduled Tasks" });
+    header.createEl("h3", { text: "Scheduled Tasks" });
 
     const filterContainer = header.createDiv({ cls: "task-alavista-filter" });
 
@@ -273,19 +271,20 @@ export class TaskAlavistaSidebarView extends ItemView {
    *
    * @param task - Task to open
    */
-  private async openTaskInNote(task: ScheduledTask): Promise<void> {
+  private openTaskInNote(task: ScheduledTask): void {
     const file = this.app.vault.getAbstractFileByPath(task.filePath);
 
     if (file instanceof TFile) {
       const leaf = this.app.workspace.getLeaf(false);
-      await leaf.openFile(file);
+      void leaf.openFile(file).then(() => {
 
-      // Set cursor to task line
-      const editor = this.app.workspace.activeEditor?.editor;
-      if (editor) {
-        editor.setCursor({ line: task.lineNumber, ch: 0 });
-        editor.scrollIntoView({ from: { line: task.lineNumber, ch: 0 }, to: { line: task.lineNumber, ch: 0 } }, true);
-      }
+        // Set cursor to task line
+        const editor = this.app.workspace.activeEditor?.editor;
+        if (editor) {
+          editor.setCursor({ line: task.lineNumber, ch: 0 });
+          editor.scrollIntoView({ from: { line: task.lineNumber, ch: 0 }, to: { line: task.lineNumber, ch: 0 } }, true);
+        }
+      });
     }
   }
 

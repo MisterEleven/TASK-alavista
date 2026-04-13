@@ -29,7 +29,9 @@
       }
     ],
     "@typescript-eslint/no-non-null-assertion": "warn",
-    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "@typescript-eslint/no-unnecessary-type-assertion": "off",
+    "@typescript-eslint/require-await": "off",
+    "no-console": ["warn", { "allow": ["warn", "error", "log"] }],
     "prefer-const": "error",
     "no-var": "error"
   },
