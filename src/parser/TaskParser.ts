@@ -56,7 +56,13 @@ export class TaskParser {
     };
 
     try {
-      const task = this.buildTask(taskMatch, filePath, lineNumber, completionStatus === "x", trimmedLine);
+      const task = this.buildTask(
+        taskMatch,
+        filePath,
+        lineNumber,
+        completionStatus === "x",
+        trimmedLine
+      );
       return { success: true, task };
     } catch (error) {
       return {
