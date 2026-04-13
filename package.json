@@ -1,6 +1,6 @@
 {
   "name": "task-alavista",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Transform Obsidian tasks into calendar events with automatic .ics generation",
   "main": "main.js",
   "scripts": {
