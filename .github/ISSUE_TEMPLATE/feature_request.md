@@ -1,10 +1,12 @@
 ---
-name: 💡 Feature Request
+name: "\U0001F4A1 Feature Request"
 about: Suggest an idea for TASK-alavista
 title: 'feat: [Brief description of the feature]'
-labels: enhancement
-assignees: ''
+labels: bug, enhancement
+assignees: MisterEleven
+
 ---
+
 ## 🚀 Feature Description
 
 A clear and concise description of what the feature is and how it would work within the TASK-alavista workflow.
