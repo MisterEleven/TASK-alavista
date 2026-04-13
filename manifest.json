@@ -1,0 +1,10 @@
+{
+  "id": "task-alavista",
+  "name": "TASK-alavista",
+  "version": "0.1.0",
+  "minAppVersion": "1.5.0",
+  "description": "Transform Obsidian tasks into calendar events with automatic .ics generation for seamless calendar app integration",
+  "author": "Timo Feddern",
+  "authorUrl": "https://github.com/MisterEleven/TASK-alavista",
+  "isDesktopOnly": false
+}

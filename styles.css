@@ -1,0 +1,91 @@
+/* Global plugin styles */
+
+.task-alavista-sidebar {
+  padding: 10px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.task-alavista-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.task-alavista-filter {
+  display: flex;
+  gap: 5px;
+}
+
+.task-alavista-filter button {
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.task-alavista-filter button.active {
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+}
+
+.task-alavista-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+}
+
+.task-alavista-task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task-alavista-task-item {
+  padding: 12px;
+  border-radius: 6px;
+  background-color: var(--background-secondary);
+  border-left: 3px solid var(--interactive-accent);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.task-alavista-task-item:hover {
+  background-color: var(--background-secondary-alt);
+}
+
+.task-alavista-task-date {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.task-alavista-task-title {
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.task-alavista-task-meta {
+  display: flex;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.task-alavista-task-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.task-alavista-error {
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  background-color: var(--background-modifier-error);
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--text-error);
+}
