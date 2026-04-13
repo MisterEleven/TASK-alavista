@@ -5,6 +5,8 @@ Transform your Obsidian tasks into calendar events with automatic `.ics` file ge
 [![CI](https://github.com/MisterEleven/TASK-alavista/actions/workflows/ci.yml/badge.svg)](https://github.com/MisterEleven/TASK-alavista/actions/workflows/ci.yml)
 [![Release](https://github.com/MisterEleven/TASK-alavista/actions/workflows/release.yml/badge.svg)](https://github.com/MisterEleven/TASK-alavista/actions/workflows/release.yml)
 
+![Plugin Overview](docs/images/screenshots/Overview.png)
+
 ## Features
 
 - 📅 **Automatic Calendar Sync**: Generate `.ics` files from tagged tasks
@@ -120,6 +122,8 @@ Each calendar event includes an `obsidian://` deep link that opens the exact not
 ## Settings
 
 Access settings via **Settings → TASK-alavista**:
+
+![Settings](docs/images/screenshots/Settings.png)
 
 | Setting | Description | Default |
 |---------|-------------|---------|
