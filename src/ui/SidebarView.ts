@@ -172,7 +172,7 @@ export class TaskAlavistaSidebarView extends ItemView {
     const empty = container.createDiv({ cls: "task-alavista-empty" });
     empty.createEl("p", { text: "No scheduled tasks found" });
     empty.createEl("p", {
-      text: 'Create a task with #schedule tag to get started',
+      text: "Create a task with #schedule tag to get started",
       cls: "task-alavista-hint",
     });
   }
@@ -277,12 +277,14 @@ export class TaskAlavistaSidebarView extends ItemView {
     if (file instanceof TFile) {
       const leaf = this.app.workspace.getLeaf(false);
       void leaf.openFile(file).then(() => {
-
         // Set cursor to task line
         const editor = this.app.workspace.activeEditor?.editor;
         if (editor) {
           editor.setCursor({ line: task.lineNumber, ch: 0 });
-          editor.scrollIntoView({ from: { line: task.lineNumber, ch: 0 }, to: { line: task.lineNumber, ch: 0 } }, true);
+          editor.scrollIntoView(
+            { from: { line: task.lineNumber, ch: 0 }, to: { line: task.lineNumber, ch: 0 } },
+            true
+          );
         }
       });
     }

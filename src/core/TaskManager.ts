@@ -217,10 +217,14 @@ export class TaskManager {
       // Write to file
       await this.icsWriter.write(icsContent);
 
-      console.log(`Updated ICS file with ${filteredTasks.length} tasks at ${this.icsWriter.getPath()}`);
+      console.log(
+        `Updated ICS file with ${filteredTasks.length} tasks at ${this.icsWriter.getPath()}`
+      );
     } catch (error) {
       console.error("Failed to update ICS file:", error);
-      new Notice(`Failed to update ICS file: ${error instanceof Error ? error.message : "Unknown error"}`);
+      new Notice(
+        `Failed to update ICS file: ${error instanceof Error ? error.message : "Unknown error"}`
+      );
       throw error;
     }
   }
