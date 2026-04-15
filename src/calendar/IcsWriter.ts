@@ -23,16 +23,10 @@ export class IcsWriter {
       // Ensure directory exists
       await this.ensureDirectoryExists();
 
-      // Check if file exists
-      const file = this.vault.getAbstractFileByPath(this.filePath);
-
-      if (file instanceof TFile) {
-        // Update existing file
-        await this.vault.modify(file, content);
-      } else {
-        // Create new file
-        await this.vault.create(this.filePath, content);
-      }
+      // Use adapter.write which handles file existence automatically
+      // This bypasses the vault cache and writes directly to the file system
+      const adapter = this.vault.adapter;
+      await adapter.write(this.filePath, content);
     } catch (error) {
       throw new Error(
         `Failed to write ICS file: ${error instanceof Error ? error.message : "Unknown error"}`
