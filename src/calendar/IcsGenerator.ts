@@ -91,13 +91,15 @@ export class IcsGenerator {
   }
 
   /**
-   * Format a Date object for ICS format (YYYYMMDDTHHMMSSZ)
+   * Format a Date object for ICS format (YYYYMMDDTHHMMSS - local time, no Z suffix)
    *
    * @param date - Date to format
-   * @returns ICS-formatted date string
+   * @returns ICS-formatted date string in local time
    */
   private formatIcsDateTime(date: Date): string {
-    return format(date, "yyyyMMdd'T'HHmmss'Z'");
+    // Format as local time without 'Z' suffix
+    // This ensures the time is interpreted in the user's local timezone
+    return format(date, "yyyyMMdd'T'HHmmss");
   }
 
   /**
