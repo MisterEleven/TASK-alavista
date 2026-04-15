@@ -1,0 +1,2 @@
+{"id":"5b2f6249-1267-4eeb-8d61-e80d14ad2b9a","ts":"2026-04-13T17:54:48.410Z","version":"1.0.2","toolName":"write_to_file","taskID":"f6d1d6c4-0bba-4f50-8d26-0f304afda48b","path":"src/calendar/IcsWriter.ts","numLinesApplied":151,"currentRange":{"startLine":1,"endLine":151}}
+{"id":"d8f82654-750d-43df-9900-b5ff8edc44bd","ts":"2026-04-15T06:31:50.756Z","version":"1.0.2","toolName":"apply_diff","taskID":"f6d1d6c4-0bba-4f50-8d26-0f304afda48b","path":"src/calendar/IcsWriter.ts","numLinesApplied":4,"currentRange":{"startLine":26,"endLine":29}}
