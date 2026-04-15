@@ -5,6 +5,17 @@ All notable changes to TASK-alavista will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-04-15
+
+### Fixed
+- **File write race condition**: Replaced vault.create()/modify() with vault.adapter.write() to eliminate "File already exists" errors on plugin startup
+- **Timezone handling**: Removed 'Z' suffix from ICS datetime format to prevent 2-hour offset for users in non-UTC timezones (e.g., UTC+2)
+- **Plugin initialization**: Deferred TaskManager initialization until workspace is ready, preventing "No tab group found" errors and ensuring all tasks are loaded on startup
+- **Empty task list on startup**: Tasks now load automatically without requiring manual refresh
+
+### Changed
+- Sidebar view now opens as a tab in the main area instead of forcing right sidebar creation (can be manually moved to sidebar)
+
 ## [1.0.0] - 2026-04-13
 
 ### Added

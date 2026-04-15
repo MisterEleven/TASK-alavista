@@ -39,7 +39,7 @@ export default class TaskAlavistaPlugin extends Plugin {
     this.app.workspace.onLayoutReady(() => {
       // Initialize TaskManager after workspace is ready
       this.taskManager = new TaskManager(this.app, this.settings);
-      
+
       void this.taskManager.initialize().then(() => {
         // Update sidebar when tasks change
         this.taskManager!.onTasksChanged((tasks) => {
@@ -147,8 +147,8 @@ export default class TaskAlavistaPlugin extends Plugin {
     if (!leaf) {
       // Use getLeaf with 'tab' to create in a safe location
       // This avoids issues with uninitialized sidebars
-      leaf = workspace.getLeaf('tab');
-      
+      leaf = workspace.getLeaf("tab");
+
       if (leaf) {
         await leaf.setViewState({
           type: VIEW_TYPE_TASK_ALAVISTA,
