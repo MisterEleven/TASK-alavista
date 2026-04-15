@@ -1,0 +1,2 @@
+{"id":"e02ae4f7-1537-4a99-96cf-83d8b5bb1052","ts":"2026-04-13T17:22:46.716Z","version":"1.0.2","toolName":"write_to_file","taskID":"f6d1d6c4-0bba-4f50-8d26-0f304afda48b","path":"manifest.json","numLinesApplied":11,"currentRange":{"startLine":1,"endLine":11}}
+{"id":"f8dbb8a4-0f8a-4504-a50e-bbba5bdb75dd","ts":"2026-04-13T17:24:14.071Z","version":"1.0.2","toolName":"write_to_file","taskID":"f6d1d6c4-0bba-4f50-8d26-0f304afda48b","path":"versions.json","numLinesApplied":3,"currentRange":{"startLine":4,"endLine":5}}
