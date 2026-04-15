@@ -32,22 +32,30 @@ export default class TaskAlavistaPlugin extends Plugin {
       return view;
     });
 
-    // Initialize TaskManager
-    this.taskManager = new TaskManager(this.app, this.settings);
-    await this.taskManager.initialize();
-
-    // Update sidebar when tasks change
-    this.taskManager.onTasksChanged((tasks) => {
-      if (this.sidebarView) {
-        this.sidebarView.updateTasks(tasks);
-      }
-    });
-
     // Register commands
     this.registerCommands();
 
-    // Activate sidebar view
-    void this.activateSidebarView();
+    // Defer initialization until workspace is ready
+    this.app.workspace.onLayoutReady(() => {
+      // Initialize TaskManager after workspace is ready
+      this.taskManager = new TaskManager(this.app, this.settings);
+      
+      void this.taskManager.initialize().then(() => {
+        // Update sidebar when tasks change
+        this.taskManager!.onTasksChanged((tasks) => {
+          if (this.sidebarView) {
+            this.sidebarView.updateTasks(tasks);
+          }
+        });
+
+        // Activate sidebar and update with tasks
+        void this.activateSidebarView().then(() => {
+          if (this.sidebarView && this.taskManager) {
+            this.sidebarView.updateTasks(this.taskManager.getTasks());
+          }
+        });
+      });
+    });
   }
 
   /**
@@ -137,24 +145,15 @@ export default class TaskAlavistaPlugin extends Plugin {
     let leaf = workspace.getLeavesOfType(VIEW_TYPE_TASK_ALAVISTA)[0];
 
     if (!leaf) {
-      // Create new leaf in right sidebar
-      const rightLeaf = workspace.getRightLeaf(false);
-      if (!rightLeaf) {
-        // Right sidebar doesn't exist, create it
-        const newLeaf = workspace.getLeaf("split", "vertical");
-        if (newLeaf) {
-          await newLeaf.setViewState({
-            type: VIEW_TYPE_TASK_ALAVISTA,
-            active: true,
-          });
-          leaf = newLeaf;
-        }
-      } else {
-        await rightLeaf.setViewState({
+      // Use getLeaf with 'tab' to create in a safe location
+      // This avoids issues with uninitialized sidebars
+      leaf = workspace.getLeaf('tab');
+      
+      if (leaf) {
+        await leaf.setViewState({
           type: VIEW_TYPE_TASK_ALAVISTA,
           active: true,
         });
-        leaf = rightLeaf;
       }
     }
 
